@@ -38,7 +38,7 @@ def get_styles():
     """
 
 def setup_ui():
-    st.set_page_config(page_title="CMT Taxonomy", layout="wide")
+    st.set_page_config(page_title="CMT Taxonomy")
     st.markdown(get_styles(), unsafe_allow_html=True)
     st.title("CMT (Cut-Make-Trim) Taxonomy")
     st.write("""
