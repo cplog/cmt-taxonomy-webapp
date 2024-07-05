@@ -1,0 +1,72 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f7fafc;
+    color: #2d3748;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.main-title {
+    color: #2b6cb0;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.intro {
+    background-color: #ebf8ff;
+    border-left: 4px solid #2b6cb0;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.node {
+    background-color: #3182ce;
+    color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.node:hover {
+    background-color: #2b6cb0;
+    transform: translateX(5px);
+}
+
+.leaf {
+    background-color: #bee3f8;
+    color: #2b6cb0;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.leaf:hover {
+    background-color: #90cdf4;
+    transform: translateX(5px);
+}
+
+.level-0 { margin-left: 0; }
+.level-1 { margin-left: 20px; }
+.level-2 { margin-left: 40px; }
+.level-3 { margin-left: 60px; }
+.level-4 { margin-left: 80px; }
+
+.stCheckbox {
+    margin-bottom: 0 !important;
+}
+
+.css-1r6slb0 { /* Streamlit's default padding class */
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
