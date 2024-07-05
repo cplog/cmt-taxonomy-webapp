@@ -74,50 +74,58 @@ def render_taxonomy(data, level=0):
 def render_cut():  
     cut_data = {  
         "Fabric Preparation": {  
-            "Inspection and Quality Control": [  
-                ("Visual inspection for defects", 6),  
-                ("Measurement of fabric width and length", 4),  
-                ("Testing fabric properties (shrinkage, colorfastness)", 7)  
+            "Fabric inspection and quality control": [  
+                ("Visual and instrumental inspection for defects", 6),  
+                ("Measuring fabric weight, width, and other specifications", 4)  
             ],  
-            "Relaxation and Conditioning": [  
-                ("Allowing fabric to relax", 4),  
-                ("Controlling humidity and temperature", 5)  
+            "Fabric relaxation and conditioning": [  
+                ("Allowing fabric to relax before cutting to prevent shrinkage", 4),  
+                ("Humidity control", 5)  
             ],  
-            "Spreading Fabric": [  
+            "Spreading fabric on cutting tables": [  
                 ("Manual spreading", 5),  
-                ("Automated spreading", 6)  
+                ("Automated spreading machines", 6)  
             ],  
-            "Handling Special Fabrics": [  
-                ("Handling delicate fabrics", 8),  
-                ("Handling stretchy fabrics", 7)  
+            "Special handling for delicate or difficult fabrics (e.g., silk, velvet, leather)": [  
+                ("Using specific techniques and equipment to prevent damage", 8)  
             ]  
         },  
         "Pattern Engineering": {  
-            "Pattern Creation": [  
-                ("Manual pattern making", 8),  
-                ("Digital pattern making", 9)  
+            "Pattern creation and digitization": [  
+                ("Using CAD software for precision", 8)  
             ],  
-            "Grading": [  
-                ("Manual grading", 7),  
-                ("Digital grading", 8)  
+            "Grading for different sizes": [  
+                ("Ensuring consistency across sizes", 7)  
             ],  
-            "Marker Making": [  
-                ("Manual marker making", 6),  
-                ("Digital marker making", 7)  
+            "Marker making (pattern layout)": [  
+                ("Optimizing fabric usage", 6),  
+                ("Nesting for optimal fabric utilization", 7),  
+                ("Reducing waste through strategic pattern placement", 7)  
             ]  
         },  
-        "Cutting": {  
-            "Manual Cutting": [  
-                ("Using scissors", 5),  
-                ("Using rotary cutters", 6)  
+        "Cutting Methods": {  
+            "Manual cutting (scissors, rotary cutters)": [  
+                ("Suitable for small batches and custom orders", 5)  
             ],  
-            "Automated Cutting": [  
-                ("Using cutting machines", 8),  
-                ("Laser cutting", 9)  
+            "Die cutting": [  
+                ("Efficient for repetitive shapes", 6)  
             ],  
-            "Handling Cut Pieces": [  
-                ("Bundling and labeling", 5),  
-                ("Transporting to sewing section", 4)  
+            "Automated cutting (CNC, laser, ultrasonic)": [  
+                ("High precision and efficiency for large batches", 8)  
+            ],  
+            "Specialized cutting for different materials (e.g., leather skiving)": [  
+                ("Techniques adapted to specific fabric properties", 7)  
+            ]  
+        },  
+        "Marking and Bundling": {  
+            "Marking seam allowances, notches, and other reference points": [  
+                ("Using chalk, markers, or digital methods", 5)  
+            ],  
+            "Piece numbering and size labeling": [  
+                ("Ensuring accurate assembly", 4)  
+            ],  
+            "Bundle creation and ticketing": [  
+                ("Organizing pieces for efficient workflow", 5)  
             ]  
         }  
     }  
@@ -125,44 +133,68 @@ def render_cut():
   
 def render_make():  
     make_data = {  
-        "Sewing": {  
-            "Machine Sewing": [  
-                ("Single needle lockstitch", 6),  
-                ("Overlock stitching", 7),  
-                ("Coverstitching", 8)  
+        "Pre-sewing Operations": {  
+            "Fusing and interfacing application": [  
+                ("Adding structure and support", 6)  
             ],  
-            "Hand Sewing": [  
-                ("Hand basting", 5),  
-                ("Hand hemming", 6)  
+            "Pleating and pressing": [  
+                ("Creating design elements and ensuring crisp lines", 7)  
+            ],  
+            "Dart construction": [  
+                ("Shaping the garment to fit the body", 5)  
+            ],  
+            "Embroidery or print application": [  
+                ("Adding decorative or brand-specific elements", 8)  
+            ]  
+        },  
+        "Sewing and Assembly": {  
+            "Stitching Techniques": [  
+                ("Lockstitch", 6),  
+                ("Chainstitch", 7),  
+                ("Overlock/serge stitch", 8),  
+                ("Coverstitch", 7),  
+                ("Blind stitch", 6),  
+                ("Bartack stitch", 7),  
+                ("Buttonhole stitch", 8),  
+                ("Decorative stitching (e.g., embroidery, smocking)", 9)  
+            ],  
+            "Seam Types": [  
+                ("Plain seams", 5),  
+                ("French seams", 6),  
+                ("Flat-felled seams", 7),  
+                ("Bound seams", 6),  
+                ("Lapped seams", 7),  
+                ("Welt seams", 8),  
+                ("Specialty seams (e.g., waterproof, stretchy)", 9)  
+            ],  
+            "Component Construction": [  
+                ("Collar assembly", 6),  
+                ("Sleeve insertion", 7),  
+                ("Pocket construction (various types)", 6),  
+                ("Zipper insertion (various methods)", 8),  
+                ("Button attachment", 7),  
+                ("Waistband application", 6)  
             ],  
             "Special Techniques": [  
-                ("Embroidery", 9),  
-                ("Applique", 8)  
-            ]  
-        },  
-        "Assembly": {  
-            "Joining Pieces": [  
-                ("Seaming", 7),  
-                ("Topstitching", 6)  
+                ("Quilting", 8),  
+                ("Ruching", 7),  
+                ("Gathering", 6),  
+                ("Pintucking", 7),  
+                ("Appliqué", 8),  
+                ("Piping insertion", 7)  
             ],  
-            "Attaching Components": [  
-                ("Sewing zippers", 8),  
-                ("Sewing buttons", 7),  
-                ("Attaching labels", 5)  
-            ]  
-        },  
-        "Finishing": {  
-            "Pressing": [  
-                ("Using steam irons", 6),  
-                ("Using pressing machines", 7)  
+            "Fabric Treatments": [  
+                ("Washing and distressing (e.g., for denim)", 7),  
+                ("Enzyme washing", 6),  
+                ("Stone washing", 7),  
+                ("Acid washing", 8),  
+                ("Sandblasting", 7),  
+                ("Tie-dyeing", 8)  
             ],  
-            "Trimming": [  
-                ("Trimming threads", 4),  
-                ("Cutting excess fabric", 5)  
-            ],  
-            "Quality Control": [  
-                ("Inspecting seams", 7),  
-                ("Checking measurements", 6)  
+            "Specialty Processes": [  
+                ("Leather working techniques", 8),  
+                ("Knitwear finishing", 7),  
+                ("Fur handling and assembly", 9)  
             ]  
         }  
     }  
@@ -170,39 +202,123 @@ def render_make():
   
 def render_trim():  
     trim_data = {  
-        "Packaging": {  
-            "Folding": [  
-                ("Manual folding", 5),  
-                ("Automated folding", 6)  
-            ],  
-            "Bagging": [  
-                ("Using poly bags", 4),  
-                ("Using eco-friendly bags", 5)  
-            ]  
-        },  
-        "Labeling": [  
-            ("Attaching size labels", 4),  
-            ("Attaching care labels", 5)  
+        "Edge Finishing": [  
+            ("Hemming (various methods)", 6),  
+            ("Binding application", 7),  
+            ("Facing application", 6),  
+            ("Trimming excess fabric", 5),  
+            ("Serging/overlocking edges", 6)  
         ],  
-        "Final Inspection": [  
-            ("Visual inspection", 6),  
-            ("Measurement verification", 5)  
+        "Closures and Hardware": [  
+            ("Button attachment", 7),  
+            ("Buttonhole creation", 8),  
+            ("Snap fastener application", 6),  
+            ("Hook and eye attachment", 5),  
+            ("Rivet insertion", 7),  
+            ("Eyelet insertion", 6)  
         ],  
-        "Shipping": [  
-            ("Packing into cartons", 4),  
-            ("Arranging logistics", 6)  
+        "Embellishments": [  
+            ("Sequin application", 8),  
+            ("Bead work", 7),  
+            ("Lace application", 6),  
+            ("Fringe attachment", 7),  
+            ("Patch application", 6)  
+        ],  
+        "Labels and Tags": [  
+            ("Brand label attachment", 5),  
+            ("Size label insertion", 4),  
+            ("Care instruction tag application", 5),  
+            ("Hang tag attachment", 4)  
+        ],  
+        "Surface Treatments": [  
+            ("Garment dyeing", 7),  
+            ("Printing (screen, digital, heat transfer)", 8),  
+            ("Embossing", 7),  
+            ("Laser etching", 8),  
+            ("Fabric painting", 7)  
+        ],  
+        "Protective Finishes": [  
+            ("Water-repellent coating application", 8),  
+            ("Stain-resistant treatment", 7),  
+            ("UV-protective finish application", 8),  
+            ("Flame-retardant treatment", 9),  
+            ("Anti-microbial finish application", 8)  
         ]  
     }  
     render_taxonomy(trim_data)  
   
+def render_quality_control():  
+    qc_data = {  
+        "Inspection": [  
+            ("In-line quality checks", 7),  
+            ("Final garment inspection", 8),  
+            ("Measurement verification", 6)  
+        ],  
+        "Pressing and Shaping": [  
+            ("Seam pressing", 6),  
+            ("Final pressing and steaming", 7),  
+            ("Shaping on forms or mannequins", 8)  
+        ],  
+        "Packaging": [  
+            ("Folding and bagging", 5),  
+            ("Hanger insertion", 4),  
+            ("Box packaging", 6),  
+            ("Special packaging for delicate items", 7)  
+        ],  
+        "Testing": [  
+            ("Fabric performance testing (e.g., colorfastness, shrinkage)", 8),  
+            ("Garment durability testing", 7),  
+            ("Fit model testing", 6),  
+            ("Wash testing", 7)  
+        ]  
+    }  
+    render_taxonomy(qc_data)  
+  
+def render_specialized_processes():  
+    sp_data = {  
+        "Haute Couture Techniques": [  
+            ("Hand beading and embroidery", 9),  
+            ("Fabric manipulation (e.g., origami folding, fabric flowers)", 8),  
+            ("Custom fitting and draping", 9)  
+        ],  
+        "Technical Garment Manufacturing": [  
+            ("Seam sealing for waterproof garments", 8),  
+            ("Welded seam construction", 9),  
+            ("Integration of wearable technology", 8),  
+            ("Protective gear assembly (e.g., bulletproof vests)", 9)  
+        ],  
+        "Sustainable Practices": [  
+            ("Zero-waste pattern cutting", 8),  
+            ("Upcycling and garment reconstruction", 7),  
+            ("Use of eco-friendly dyes and treatments", 8),  
+            ("Implementation of circular fashion principles", 9)  
+        ]  
+    }  
+    render_taxonomy(sp_data)  
+  
 def main():  
     setup_ui()  
-    st.header("Cut")  
-    render_cut()  
-    st.header("Make")  
-    render_make()  
-    st.header("Trim")  
-    render_trim()  
+    tabs = st.tabs(["Cut", "Make", "Trim", "Quality Control and Finishing", "Specialized Processes"])  
+  
+    with tabs[0]:  
+        st.header("Cut")  
+        render_cut()  
+  
+    with tabs[1]:  
+        st.header("Make")  
+        render_make()  
+  
+    with tabs[2]:  
+        st.header("Trim")  
+        render_trim()  
+  
+    with tabs[3]:  
+        st.header("Quality Control and Finishing")  
+        render_quality_control()  
+  
+    with tabs[4]:  
+        st.header("Specialized Processes")  
+        render_specialized_processes()  
   
 if __name__ == "__main__":  
     main()  
