@@ -1,0 +1,65 @@
+[
+    {
+        "label": "streamlit",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "streamlit",
+        "description": "streamlit",
+        "detail": "streamlit",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "get_styles",
+        "kind": 2,
+        "importPath": "homepage",
+        "description": "homepage",
+        "peekOfCode": "def get_styles():\n    return \"\"\"\n    <style>\n    body {\n        font-family: 'Arial', sans-serif;\n    }\n    .intro {\n        font-size: 1.1em;\n        background-color: #f0f0f0;\n        padding: 15px;",
+        "detail": "homepage",
+        "documentation": {}
+    },
+    {
+        "label": "setup_ui",
+        "kind": 2,
+        "importPath": "homepage",
+        "description": "homepage",
+        "peekOfCode": "def setup_ui():\n    st.set_page_config(page_title=\"Comprehensive Garment Manufacturing Process\", layout=\"wide\")\n    st.markdown(get_styles(), unsafe_allow_html=True)\n    st.title(\"Comprehensive Garment Manufacturing Process\")\n    st.write(\"\"\"\n    <div class=\"intro\">\n        This interactive app displays a comprehensive overview of the garment manufacturing process, \n        including Cut-Make-Trim (CMT) and additional stages. Explore each section to understand \n        the detailed steps and techniques involved in creating clothing.\n    </div>",
+        "detail": "homepage",
+        "documentation": {}
+    },
+    {
+        "label": "render_process_section",
+        "kind": 2,
+        "importPath": "homepage",
+        "description": "homepage",
+        "peekOfCode": "def render_process_section(data):\n    for section, subsections in data.items():\n        st.markdown(f\"<div class='section-header'>{section}</div>\", unsafe_allow_html=True)\n        for subsection, tasks in subsections.items():\n            with st.expander(subsection):\n                st.markdown(f\"<div class='subsection-header'>{subsection}</div>\", unsafe_allow_html=True)\n                for task, complexity, description in tasks:\n                    color = get_complexity_color(complexity)\n                    st.markdown(\n                        f\"<div class='task-item'>{task} \"",
+        "detail": "homepage",
+        "documentation": {}
+    },
+    {
+        "label": "get_complexity_color",
+        "kind": 2,
+        "importPath": "homepage",
+        "description": "homepage",
+        "peekOfCode": "def get_complexity_color(complexity):\n    if complexity <= 3:\n        return \"#34a853\"  # Green for low complexity\n    elif complexity <= 6:\n        return \"#fbbc05\"  # Yellow for medium complexity\n    else:\n        return \"#ea4335\"  # Red for high complexity\ndef main():\n    setup_ui()\n    # Define the process data with detailed descriptions",
+        "detail": "homepage",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "homepage",
+        "description": "homepage",
+        "peekOfCode": "def main():\n    setup_ui()\n    # Define the process data with detailed descriptions\n    process_data = {\n        \"1. Design and Pre-production\": {\n            \"Concept Development\": [\n                (\"Market research and trend analysis\", 7, \"Research current market trends, consumer preferences, and competitors.\"),\n                (\"Mood board creation\", 6, \"Create a visual representation of ideas, themes, and inspirations for the collection.\"),\n                (\"Sketch development\", 8, \"Develop detailed sketches of each garment, including front, back, and side views.\"),\n            ],",
+        "detail": "homepage",
+        "documentation": {}
+    }
+]

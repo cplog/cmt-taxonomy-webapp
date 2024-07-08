@@ -1,324 +1,224 @@
-import streamlit as st  
-import pandas as pd  
-  
-def get_styles():  
-    return """  
-    <style>  
-    body {  
-        font-family: 'Arial', sans-serif;  
-    }  
-    .intro {  
-        font-size: 1.1em;  
-        background-color: #f0f0f0;  
-        padding: 15px;  
-        border-radius: 5px;  
-        margin-bottom: 20px;  
-    }  
-    .checkbox {  
-        font-size: 1.1em;  
-    }  
-    .leaf {  
-        margin-left: 20px;  
-        font-size: 1em;  
-        color: #333;  
-    }  
-    .leaf.level-1 {  
-        color: #1a73e8;  
-    }  
-    .leaf.level-2 {  
-        color: #34a853;  
-    }  
-    .leaf.level-3 {  
-        color: #fbbc05;  
-    }  
-    .leaf.level-4 {  
-        color: #ea4335;  
-    }  
-    </style>  
-    """  
-  
-def setup_ui():  
-    st.set_page_config(page_title="CMT Taxonomy")  
-    st.markdown(get_styles(), unsafe_allow_html=True)  
-    st.title("CMT (Cut-Make-Trim) Taxonomy")  
-    st.write("""  
-    <div class="intro">  
-        This interactive app displays a comprehensive taxonomy of the Cut-Make-Trim (CMT) process in garment manufacturing.   
-        Expand each section to explore the detailed steps and techniques involved in creating clothing.  
-    </div>  
-    """, unsafe_allow_html=True)  
-    st.sidebar.title("About")  
-    st.sidebar.info(  
-        "This app provides an interactive view of the Cut-Make-Trim (CMT) process in garment manufacturing. "  
-        "Use the checkboxes to expand or collapse different sections of the taxonomy."  
-    )  
-    st.sidebar.title("Navigation Tips")  
-    st.sidebar.info(  
-        "• Click on a checkbox to expand or collapse a section.\n"  
-        "• Sub-items are indented for easy visualization of the hierarchy.\n"  
-        "• Use the scrollbar on the right to navigate through the entire taxonomy."  
-    )  
-  
-def render_taxonomy(data, level=0):  
-    for key, value in data.items():  
-        if isinstance(value, dict):  
-            expanded = st.checkbox(f"{'  ' * level}{key}", key=f"{key}_{level}")  
-            if expanded:  
-                render_taxonomy(value, level + 1)  
-        elif isinstance(value, list):  
-            expanded = st.checkbox(f"{'  ' * level}{key}", key=f"{key}_{level}")  
-            if expanded:  
-                df = pd.DataFrame(value, columns=["Task", "Complexity"])  
-                st.table(df)  
-  
-def render_cut():  
-    cut_data = {  
-        "Fabric Preparation": {  
-            "Fabric inspection and quality control": [  
-                ("Visual and instrumental inspection for defects", 6),  
-                ("Measuring fabric weight, width, and other specifications", 4)  
-            ],  
-            "Fabric relaxation and conditioning": [  
-                ("Allowing fabric to relax before cutting to prevent shrinkage", 4),  
-                ("Humidity control", 5)  
-            ],  
-            "Spreading fabric on cutting tables": [  
-                ("Manual spreading", 5),  
-                ("Automated spreading machines", 6)  
-            ],  
-            "Special handling for delicate or difficult fabrics (e.g., silk, velvet, leather)": [  
-                ("Using specific techniques and equipment to prevent damage", 8)  
-            ]  
-        },  
-        "Pattern Engineering": {  
-            "Pattern creation and digitization": [  
-                ("Using CAD software for precision", 8)  
-            ],  
-            "Grading for different sizes": [  
-                ("Ensuring consistency across sizes", 7)  
-            ],  
-            "Marker making (pattern layout)": [  
-                ("Optimizing fabric usage", 6),  
-                ("Nesting for optimal fabric utilization", 7),  
-                ("Reducing waste through strategic pattern placement", 7)  
-            ]  
-        },  
-        "Cutting Methods": {  
-            "Manual cutting (scissors, rotary cutters)": [  
-                ("Suitable for small batches and custom orders", 5)  
-            ],  
-            "Die cutting": [  
-                ("Efficient for repetitive shapes", 6)  
-            ],  
-            "Automated cutting (CNC, laser, ultrasonic)": [  
-                ("High precision and efficiency for large batches", 8)  
-            ],  
-            "Specialized cutting for different materials (e.g., leather skiving)": [  
-                ("Techniques adapted to specific fabric properties", 7)  
-            ]  
-        },  
-        "Marking and Bundling": {  
-            "Marking seam allowances, notches, and other reference points": [  
-                ("Using chalk, markers, or digital methods", 5)  
-            ],  
-            "Piece numbering and size labeling": [  
-                ("Ensuring accurate assembly", 4)  
-            ],  
-            "Bundle creation and ticketing": [  
-                ("Organizing pieces for efficient workflow", 5)  
-            ]  
-        }  
-    }  
-    render_taxonomy(cut_data)  
-  
-def render_make():  
-    make_data = {  
-        "Pre-sewing Operations": {  
-            "Fusing and interfacing application": [  
-                ("Adding structure and support", 6)  
-            ],  
-            "Pleating and pressing": [  
-                ("Creating design elements and ensuring crisp lines", 7)  
-            ],  
-            "Dart construction": [  
-                ("Shaping the garment to fit the body", 5)  
-            ],  
-            "Embroidery or print application": [  
-                ("Adding decorative or brand-specific elements", 8)  
-            ]  
-        },  
-        "Sewing and Assembly": {  
-            "Stitching Techniques": [  
-                ("Lockstitch", 6),  
-                ("Chainstitch", 7),  
-                ("Overlock/serge stitch", 8),  
-                ("Coverstitch", 7),  
-                ("Blind stitch", 6),  
-                ("Bartack stitch", 7),  
-                ("Buttonhole stitch", 8),  
-                ("Decorative stitching (e.g., embroidery, smocking)", 9)  
-            ],  
-            "Seam Types": [  
-                ("Plain seams", 5),  
-                ("French seams", 6),  
-                ("Flat-felled seams", 7),  
-                ("Bound seams", 6),  
-                ("Lapped seams", 7),  
-                ("Welt seams", 8),  
-                ("Specialty seams (e.g., waterproof, stretchy)", 9)  
-            ],  
-            "Component Construction": [  
-                ("Collar assembly", 6),  
-                ("Sleeve insertion", 7),  
-                ("Pocket construction (various types)", 6),  
-                ("Zipper insertion (various methods)", 8),  
-                ("Button attachment", 7),  
-                ("Waistband application", 6)  
-            ],  
-            "Special Techniques": [  
-                ("Quilting", 8),  
-                ("Ruching", 7),  
-                ("Gathering", 6),  
-                ("Pintucking", 7),  
-                ("Appliqué", 8),  
-                ("Piping insertion", 7)  
-            ],  
-            "Fabric Treatments": [  
-                ("Washing and distressing (e.g., for denim)", 7),  
-                ("Enzyme washing", 6),  
-                ("Stone washing", 7),  
-                ("Acid washing", 8),  
-                ("Sandblasting", 7),  
-                ("Tie-dyeing", 8)  
-            ],  
-            "Specialty Processes": [  
-                ("Leather working techniques", 8),  
-                ("Knitwear finishing", 7),  
-                ("Fur handling and assembly", 9)  
-            ]  
-        }  
-    }  
-    render_taxonomy(make_data)  
-  
-def render_trim():  
-    trim_data = {  
-        "Edge Finishing": [  
-            ("Hemming (various methods)", 6),  
-            ("Binding application", 7),  
-            ("Facing application", 6),  
-            ("Trimming excess fabric", 5),  
-            ("Serging/overlocking edges", 6)  
-        ],  
-        "Closures and Hardware": [  
-            ("Button attachment", 7),  
-            ("Buttonhole creation", 8),  
-            ("Snap fastener application", 6),  
-            ("Hook and eye attachment", 5),  
-            ("Rivet insertion", 7),  
-            ("Eyelet insertion", 6)  
-        ],  
-        "Embellishments": [  
-            ("Sequin application", 8),  
-            ("Bead work", 7),  
-            ("Lace application", 6),  
-            ("Fringe attachment", 7),  
-            ("Patch application", 6)  
-        ],  
-        "Labels and Tags": [  
-            ("Brand label attachment", 5),  
-            ("Size label insertion", 4),  
-            ("Care instruction tag application", 5),  
-            ("Hang tag attachment", 4)  
-        ],  
-        "Surface Treatments": [  
-            ("Garment dyeing", 7),  
-            ("Printing (screen, digital, heat transfer)", 8),  
-            ("Embossing", 7),  
-            ("Laser etching", 8),  
-            ("Fabric painting", 7)  
-        ],  
-        "Protective Finishes": [  
-            ("Water-repellent coating application", 8),  
-            ("Stain-resistant treatment", 7),  
-            ("UV-protective finish application", 8),  
-            ("Flame-retardant treatment", 9),  
-            ("Anti-microbial finish application", 8)  
-        ]  
-    }  
-    render_taxonomy(trim_data)  
-  
-def render_quality_control():  
-    qc_data = {  
-        "Inspection": [  
-            ("In-line quality checks", 7),  
-            ("Final garment inspection", 8),  
-            ("Measurement verification", 6)  
-        ],  
-        "Pressing and Shaping": [  
-            ("Seam pressing", 6),  
-            ("Final pressing and steaming", 7),  
-            ("Shaping on forms or mannequins", 8)  
-        ],  
-        "Packaging": [  
-            ("Folding and bagging", 5),  
-            ("Hanger insertion", 4),  
-            ("Box packaging", 6),  
-            ("Special packaging for delicate items", 7)  
-        ],  
-        "Testing": [  
-            ("Fabric performance testing (e.g., colorfastness, shrinkage)", 8),  
-            ("Garment durability testing", 7),  
-            ("Fit model testing", 6),  
-            ("Wash testing", 7)  
-        ]  
-    }  
-    render_taxonomy(qc_data)  
-  
-def render_specialized_processes():  
-    sp_data = {  
-        "Haute Couture Techniques": [  
-            ("Hand beading and embroidery", 9),  
-            ("Fabric manipulation (e.g., origami folding, fabric flowers)", 8),  
-            ("Custom fitting and draping", 9)  
-        ],  
-        "Technical Garment Manufacturing": [  
-            ("Seam sealing for waterproof garments", 8),  
-            ("Welded seam construction", 9),  
-            ("Integration of wearable technology", 8),  
-            ("Protective gear assembly (e.g., bulletproof vests)", 9)  
-        ],  
-        "Sustainable Practices": [  
-            ("Zero-waste pattern cutting", 8),  
-            ("Upcycling and garment reconstruction", 7),  
-            ("Use of eco-friendly dyes and treatments", 8),  
-            ("Implementation of circular fashion principles", 9)  
-        ]  
-    }  
-    render_taxonomy(sp_data)  
-  
-def main():  
-    setup_ui()  
-    tabs = st.tabs(["Cut", "Make", "Trim", "Quality Control and Finishing", "Specialized Processes"])  
-  
-    with tabs[0]:  
-        st.header("Cut")  
-        render_cut()  
-  
-    with tabs[1]:  
-        st.header("Make")  
-        render_make()  
-  
-    with tabs[2]:  
-        st.header("Trim")  
-        render_trim()  
-  
-    with tabs[3]:  
-        st.header("Quality Control and Finishing")  
-        render_quality_control()  
-  
-    with tabs[4]:  
-        st.header("Specialized Processes")  
-        render_specialized_processes()  
-  
-if __name__ == "__main__":  
-    main()  
+import streamlit as st
+import pandas as pd
+
+def get_styles():
+    return """
+    <style>
+    body {
+        font-family: 'Arial', sans-serif;
+    }
+    .intro {
+        font-size: 1.1em;
+        background-color: #f0f0f0;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    .section-header {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        color: #1a73e8;
+    }
+    .subsection-header {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        color: #34a853;
+    }
+    .task-item {
+        margin-left: 20px;
+        font-size: 1em;
+        color: #333;
+    }
+    .complexity-badge {
+        display: inline-block;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-size: 0.8em;
+        margin-left: 5px;
+    }
+    </style>
+    """
+
+def setup_ui():
+    st.set_page_config(page_title="Comprehensive Garment Manufacturing Process", layout="wide")
+    st.markdown(get_styles(), unsafe_allow_html=True)
+    st.title("Comprehensive Garment Manufacturing Process")
+    st.write("""
+    <div class="intro">
+        This interactive app displays a comprehensive overview of the garment manufacturing process, 
+        including Cut-Make-Trim (CMT) and additional stages. Explore each section to understand 
+        the detailed steps and techniques involved in creating clothing.
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.sidebar.title("About")
+    st.sidebar.info(
+        "This app provides an interactive view of the entire garment manufacturing process. "
+        "Use the expanders to explore different sections of the process."
+    )
+    st.sidebar.title("Navigation Tips")
+    st.sidebar.info(
+        "• Click on an expander to view its contents.\n"
+        "• Use the tabs to navigate between major process stages.\n"
+        "• Complexity ratings are provided for each task (1-10 scale)."
+    )
+
+def render_process_section(data):
+    for section, subsections in data.items():
+        st.markdown(f"<div class='section-header'>{section}</div>", unsafe_allow_html=True)
+        for subsection, tasks in subsections.items():
+            with st.expander(subsection):
+                st.markdown(f"<div class='subsection-header'>{subsection}</div>", unsafe_allow_html=True)
+                for task, complexity, description in tasks:
+                    color = get_complexity_color(complexity)
+                    st.markdown(
+                        f"<div class='task-item'>{task} "
+                        f"<span class='complexity-badge' style='background-color: {color};'>"
+                        f"Complexity: {complexity}</span></div>",
+                        unsafe_allow_html=True
+                    )
+                    st.write(description)
+
+def get_complexity_color(complexity):
+    if complexity <= 3:
+        return "#34a853"  # Green for low complexity
+    elif complexity <= 6:
+        return "#fbbc05"  # Yellow for medium complexity
+    else:
+        return "#ea4335"  # Red for high complexity
+
+def main():
+    setup_ui()
+    
+    # Define the process data with detailed descriptions
+    process_data = {
+        "1. Design and Pre-production": {
+            "Concept Development": [
+                ("Market research and trend analysis", 7, "Research current market trends, consumer preferences, and competitors."),
+                ("Mood board creation", 6, "Create a visual representation of ideas, themes, and inspirations for the collection."),
+                ("Sketch development", 8, "Develop detailed sketches of each garment, including front, back, and side views."),
+            ],
+            "Pattern Making": [
+                ("Initial pattern drafting", 9, "Draft the initial pattern pieces based on the sketches and garment specifications."),
+                ("Pattern grading", 7, "Adjust the pattern for different sizes while maintaining the design integrity."),
+                ("Digitization of patterns", 6, "Convert physical patterns into digital formats for easier modifications and storage."),
+            ],
+            "Sampling": [
+                ("Prototype creation", 8, "Create the first sample garment to test the design and fit."),
+                ("Fit testing", 7, "Evaluate the fit and make necessary adjustments to the pattern."),
+                ("Sample refinement", 6, "Refine the sample based on feedback and ensure it meets the desired quality standards."),
+            ],
+        },
+        "2. Material Sourcing and Preparation": {
+            "Fabric Selection": [
+                ("Fiber and fabric type selection", 7, "Choose appropriate fibers and fabrics based on the garment's purpose and design."),
+                ("Color and print selection", 6, "Select colors and prints that align with the collection's theme."),
+                ("Quality assessment", 8, "Assess the fabric's quality, durability, and suitability for the garment."),
+            ],
+            "Trim and Accessory Sourcing": [
+                ("Button, zipper, and hardware selection", 5, "Select suitable buttons, zippers, and other hardware components."),
+                ("Label and tag ordering", 4, "Order labels and tags that match the brand's requirements."),
+                ("Packaging material procurement", 3, "Source packaging materials that ensure the garment's protection during shipping."),
+            ],
+        },
+        "3. Cut": {
+            "Fabric Preparation": [
+                ("Fabric inspection and quality control", 6, "Inspect the fabric for any defects or inconsistencies."),
+                ("Fabric relaxation and conditioning", 5, "Allow the fabric to relax and condition to avoid shrinkage post-production."),
+                ("Spreading fabric on cutting tables", 4, "Spread the fabric evenly on cutting tables to prepare for cutting."),
+            ],
+            "Marker Making": [
+                ("Digital marker creation", 7, "Create digital markers to optimize fabric usage."),
+                ("Marker efficiency optimization", 8, "Adjust markers to minimize fabric waste."),
+                ("Nesting for minimal waste", 9, "Arrange patterns on the fabric to reduce leftover material."),
+            ],
+            "Cutting Methods": [
+                ("Manual cutting", 5, "Cut fabric manually using scissors or rotary cutters."),
+                ("Automated cutting (CNC, laser)", 8, "Use automated machines for precise and efficient cutting."),
+                ("Die cutting", 6, "Employ die cutting for consistent shapes and sizes."),
+            ],
+        },
+        "4. Make": {
+            "Pre-sewing Operations": [
+                ("Fusing and interfacing application", 6, "Apply fusible interfacing to strengthen specific garment areas."),
+                ("Pleating and pressing", 7, "Create pleats and press the fabric to set the shapes."),
+                ("Embroidery or print application", 8, "Add embroidery or prints as per the design specifications."),
+            ],
+            "Assembly": [
+                ("Seam sewing", 5, "Sew the garment's main seams together."),
+                ("Dart construction", 6, "Sew darts to shape the garment."),
+                ("Pocket attachment", 7, "Attach pockets to the garment."),
+            ],
+            "Specialized Techniques": [
+                ("Buttonhole creation", 7, "Create buttonholes with precision."),
+                ("Zipper insertion", 6, "Insert zippers accurately."),
+                ("Collar and cuff attachment", 8, "Attach collars and cuffs as per the design."),
+            ],
+        },
+        "5. Trim": {
+            "Edge Finishing": [
+                ("Hemming", 5, "Finish the garment's edges with hems."),
+                ("Binding application", 6, "Apply bindings to the edges for a neat finish."),
+                ("Serging/overlocking edges", 4, "Serg or overlock the edges to prevent fraying."),
+            ],
+            "Embellishments": [
+                ("Button attachment", 4, "Attach buttons securely."),
+                ("Sequin or bead application", 8, "Apply sequins or beads for decorative purposes."),
+                ("Appliqué", 7, "Add appliqués to enhance the garment's design."),
+            ],
+            "Labels and Tags": [
+                ("Care label insertion", 3, "Insert care labels with washing instructions."),
+                ("Brand label attachment", 4, "Attach brand labels to the garment."),
+                ("Size tag application", 3, "Apply size tags as per the specifications."),
+            ],
+        },
+        "6. Finishing and Quality Control": {
+            "Pressing and Shaping": [
+                ("Steam pressing", 5, "Press the garment with steam to remove wrinkles."),
+                ("Garment shaping", 7, "Shape the garment to ensure proper fit."),
+                ("Crease setting", 6, "Set creases as per the design."),
+            ],
+            "Quality Inspection": [
+                ("Visual inspection", 6, "Inspect the garment visually for any defects."),
+                ("Measurement verification", 5, "Verify the garment's measurements against the specifications."),
+                ("Functionality testing", 7, "Test the garment's functionality, such as zipper operation."),
+            ],
+            "Packaging": [
+                ("Folding and bagging", 4, "Fold and bag the garment for shipping."),
+                ("Hang tag attachment", 3, "Attach hang tags with branding and pricing information."),
+                ("Boxing for shipment", 5, "Box the garment for shipment."),
+            ],
+        },
+        "7. Specialized Processes": {
+            "Sustainable Practices": [
+                ("Zero-waste pattern cutting", 9, "Implement zero-waste pattern cutting to reduce fabric waste."),
+                ("Upcycling techniques", 8, "Use upcycling techniques to repurpose old garments."),
+                ("Eco-friendly dyeing and finishing", 7, "Apply eco-friendly dyeing and finishing methods."),
+            ],
+            "High-Tech Integration": [
+                ("Wearable technology incorporation", 10, "Incorporate wearable technology into garments."),
+                ("Smart fabric utilization", 9, "Utilize smart fabrics with special properties."),
+                ("3D-printed components", 8, "Use 3D printing for components like buttons and embellishments."),
+            ],
+            "Haute Couture Techniques": [
+                ("Hand beading and embroidery", 10, "Apply hand beading and embroidery for intricate designs."),
+                ("Custom draping and fitting", 9, "Perform custom draping and fitting for bespoke garments."),
+                ("Intricate fabric manipulation", 8, "Manipulate fabrics for unique textures and patterns."),
+            ],
+        },
+    }
+    
+    # Create tabs for each major process stage
+    tabs = st.tabs(list(process_data.keys()))
+    
+    # Render each section in its corresponding tab
+    for i, (section, data) in enumerate(process_data.items()):
+        with tabs[i]:
+            render_process_section({section: data})
+
+if __name__ == "__main__":
+    main()
