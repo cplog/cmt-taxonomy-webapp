@@ -9,12 +9,48 @@
         "documentation": {}
     },
     {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
         "label": "pandas",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "pandas",
         "description": "pandas",
         "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "display_nested_dict_html",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def display_nested_dict_html(d, level=0, max_level=3):\n    html = \"\"\n    indent = '&nbsp;' * 4 * level\n    card_style = (\n        \"background-color: #ffffff; \"\n        \"border: 1px solid #dbdbdb; \"\n        \"border-radius: 8px; \"\n        \"margin: 8px 0; \"\n        \"padding: 12px; \"\n        \"box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); \"",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "default_data_catalog",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "default_data_catalog = {\n    \"Data Catalog\": {\n        \"Supplier\": {\n            \"Supplier Profile\": {\n                \"Parent company\": \"\",\n                \"Associated Customers\": {\n                    \"Associated LF Customers\": \"\",\n                    \"Top 5 LF Customers\": \"\"\n                },\n                \"Supplier Status\": {",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "html_content",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "html_content = display_nested_dict_html(data_catalog)\nst.markdown(html_content, unsafe_allow_html=True)",
+        "detail": "app",
         "documentation": {}
     },
     {
