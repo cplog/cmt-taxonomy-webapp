@@ -24,8 +24,10 @@ def display_nested_dict_html(d, level=0, max_level=3):
             else:
                 html += f"{indent}<div class='item-card' style='{card_style}'><span class='key'>{key}:</span> <span class='value'>{value}</span></div>"
     elif isinstance(d, list):
+        html += f"{indent}<ul class='item-card' style='{card_style}'>"
         for item in d:
-            html += display_nested_dict_html(item, level, max_level)
+            html += f"<li>{display_nested_dict_html(item, level + 1, max_level)}</li>"
+        html += f"{indent}</ul>"
     else:
         html += f"{indent}<div class='item-card' style='{card_style}'>{d}</div>"
     
