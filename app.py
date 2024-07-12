@@ -6,28 +6,29 @@ def display_nested_dict_html(d, level=0, max_level=3):
     indent = '&nbsp;' * 4 * level
     card_style = (
         "background-color: #ffffff; "
-        "border: 1px solid #dbdbdb; "
-        "border-radius: 8px; "
-        "margin: 8px 0; "
+        "border: 1px solid #e0e0e0; "
+        "border-radius: 12px; "
+        "margin: 4px 0 4px 20px; "  # Adjusted margin-left for indentation
         "padding: 12px; "
-        "box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); "
+        "box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); "
         "transition: all 0.3s ease;"
     )
     open_tag = "open" if level < max_level else ""
     
     if isinstance(d, dict):
         for key, value in d.items():
-            if isinstance(value, (dict, list)):
+            if isinstance(value, dict):
                 html += f"{indent}<details {open_tag} class='item-card' style='{card_style}'><summary>{key}</summary>"
                 html += display_nested_dict_html(value, level + 1, max_level)
+                html += f"{indent}</details>"
+            elif isinstance(value, list):
+                html += f"{indent}<details {open_tag} class='item-card' style='{card_style}'><summary>{key}</summary>"
+                html += f"{indent}<div class='json-array'>{json.dumps(value, indent=4)}</div>"
                 html += f"{indent}</details>"
             else:
                 html += f"{indent}<div class='item-card' style='{card_style}'><span class='key'>{key}:</span> <span class='value'>{value}</span></div>"
     elif isinstance(d, list):
-        html += f"{indent}<ul class='item-card' style='{card_style}'>"
-        for item in d:
-            html += f"<li>{display_nested_dict_html(item, level + 1, max_level)}</li>"
-        html += f"{indent}</ul>"
+        html += f"{indent}<div class='json-array'>{json.dumps(d, indent=4)}</div>"
     else:
         html += f"{indent}<div class='item-card' style='{card_style}'>{d}</div>"
     
@@ -92,8 +93,8 @@ st.set_page_config(page_title="Data Catalog", layout="wide")
 st.markdown("""
     <style>
     .main {
-        background-color: #fafafa;
-        color: #262626;
+        background: #f5f5f5;
+        color: #333333;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
     .stApp {
@@ -101,27 +102,34 @@ st.markdown("""
         margin: 0 auto;
     }
     h1 {
-        color: #262626;
+        color: #333333;
         font-weight: 600;
         font-size: 28px;
         margin-bottom: 24px;
     }
     .sidebar .stTextInput>div>div>input {
-        background-color: #fafafa;
-        border: 1px solid #dbdbdb;
-        border-radius: 4px;
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        border-radius: 8px;
+        padding: 8px;
+    }
+    .sidebar {
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 16px;
+        border-radius: 12px;
     }
     .item-card {
         transition: all 0.3s ease;
     }
     .item-card:hover {
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     }
     details > summary {
         list-style: none;
         cursor: pointer;
         font-weight: 600;
-        color: #262626;
+        color: #333333;
     }
     details > summary::before {
         content: "+";
@@ -136,10 +144,20 @@ st.markdown("""
     }
     .key {
         font-weight: 600;
-        color: #262626;
+        color: #333333;
     }
     .value {
-        color: #8e8e8e;
+        color: #666666;
+    }
+    .json-array {
+        background-color: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 8px;
+        margin: 4px 0;
+        white-space: pre-wrap;
+        font-family: monospace;
+        color: #333333;
     }
     </style>
 """, unsafe_allow_html=True)

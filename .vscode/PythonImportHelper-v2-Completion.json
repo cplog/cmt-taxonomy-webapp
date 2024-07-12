@@ -9,15 +9,6 @@
         "documentation": {}
     },
     {
-        "label": "json",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
-        "documentation": {}
-    },
-    {
         "label": "pandas",
         "kind": 6,
         "isExtraImport": true,
@@ -27,11 +18,101 @@
         "documentation": {}
     },
     {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "get_styles",
+        "kind": 2,
+        "importPath": "pages.1_capability",
+        "description": "pages.1_capability",
+        "peekOfCode": "def get_styles():\n    return \"\"\"\n    <style>\n    body {\n        font-family: 'Arial', sans-serif;\n        color: #333;\n    }\n    .product-card {\n        background-color: #f9f9f9;\n        border-radius: 10px;",
+        "detail": "pages.1_capability",
+        "documentation": {}
+    },
+    {
+        "label": "setup_ui",
+        "kind": 2,
+        "importPath": "pages.1_capability",
+        "description": "pages.1_capability",
+        "peekOfCode": "def setup_ui():\n    st.set_page_config(page_title=\"H&M-Style Garment Manufacturing Matchmaker\", layout=\"wide\")\n    st.markdown(get_styles(), unsafe_allow_html=True)\n    st.title(\"H&M-Style Garment Manufacturing Matchmaker\")\n    st.write(\"\"\"\n    <div class=\"intro\">\n        Find the perfect factory for your H&M-style garment manufacturing needs. \n        Select your product type and specifications, and we'll match you with suitable factories.\n    </div>\n    \"\"\", unsafe_allow_html=True)",
+        "detail": "pages.1_capability",
+        "documentation": {}
+    },
+    {
+        "label": "get_product_types",
+        "kind": 2,
+        "importPath": "pages.1_capability",
+        "description": "pages.1_capability",
+        "peekOfCode": "def get_product_types():\n    return {\n        \"T-Shirt\": {\n            \"Fabric\": [\"Cotton\", \"Organic Cotton\", \"Polyester\", \"Cotton-Polyester Blend\", \"Modal\", \"Lyocell\", \"Bamboo\", \"Hemp\"],\n            \"Printing\": [\"Screen Printing\", \"Digital Printing\", \"Heat Transfer\", \"Embroidery\", \"Sublimation Printing\", \"DTG Printing\"],\n            \"Cutting\": [\"Die Cutting\", \"Laser Cutting\", \"Automated Cutting\", \"Rotary Cutting\", \"Water Jet Cutting\"],\n            \"Sewing\": [\"Overlock Stitching\", \"Flatlock Stitching\", \"Cover Stitching\", \"Chain Stitching\", \"Blind Stitching\"],\n            \"Finishing\": [\"Steam Pressing\", \"Folding and Packaging\", \"Labeling\", \"Hang Tag Attachment\", \"Bio-Washing\", \"Softening\"]\n        },\n        \"Jeans\": {",
+        "detail": "pages.1_capability",
+        "documentation": {}
+    },
+    {
+        "label": "get_factories",
+        "kind": 2,
+        "importPath": "pages.1_capability",
+        "description": "pages.1_capability",
+        "peekOfCode": "def get_factories():\n    return [\n        {\n            \"name\": \"EcoThreads Manufacturing\",\n            \"location\": \"Portland, Oregon\",\n            \"specialties\": [\"T-Shirts\", \"Sustainable Clothing\"],\n            \"min_order\": 500,\n            \"capabilities\": {\n                \"Fabric\": [\"Cotton\", \"Organic Cotton\", \"Recycled Polyester\"],\n                \"Printing\": [\"Screen Printing\", \"Digital Printing\"],",
+        "detail": "pages.1_capability",
+        "documentation": {}
+    },
+    {
+        "label": "product_selector",
+        "kind": 2,
+        "importPath": "pages.1_capability",
+        "description": "pages.1_capability",
+        "peekOfCode": "def product_selector(product_types):\n    st.header(\"Step 1: Select Your Product\")\n    product = st.selectbox(\"Choose a product type:\", list(product_types.keys()))\n    return product\ndef capability_selector(product, product_types):\n    st.header(\"Step 2: Specify Your Requirements\")\n    selected_capabilities = {}\n    for category, options in product_types[product].items():\n        st.subheader(category)\n        selected = st.multiselect(f\"Select {category} options:\", options)",
+        "detail": "pages.1_capability",
+        "documentation": {}
+    },
+    {
+        "label": "capability_selector",
+        "kind": 2,
+        "importPath": "pages.1_capability",
+        "description": "pages.1_capability",
+        "peekOfCode": "def capability_selector(product, product_types):\n    st.header(\"Step 2: Specify Your Requirements\")\n    selected_capabilities = {}\n    for category, options in product_types[product].items():\n        st.subheader(category)\n        selected = st.multiselect(f\"Select {category} options:\", options)\n        if selected:\n            selected_capabilities[category] = selected\n    return selected_capabilities\ndef find_matching_factories(selected_capabilities, factories):",
+        "detail": "pages.1_capability",
+        "documentation": {}
+    },
+    {
+        "label": "find_matching_factories",
+        "kind": 2,
+        "importPath": "pages.1_capability",
+        "description": "pages.1_capability",
+        "peekOfCode": "def find_matching_factories(selected_capabilities, factories):\n    matching_factories = []\n    for factory in factories:\n        if all(any(capability in factory['capabilities'].get(category, []) \n                   for capability in capabilities)\n               for category, capabilities in selected_capabilities.items()):\n            matching_factories.append(factory)\n    return matching_factories\ndef display_matching_factories(matching_factories):\n    st.header(\"Step 3: Matching Factories\")",
+        "detail": "pages.1_capability",
+        "documentation": {}
+    },
+    {
+        "label": "display_matching_factories",
+        "kind": 2,
+        "importPath": "pages.1_capability",
+        "description": "pages.1_capability",
+        "peekOfCode": "def display_matching_factories(matching_factories):\n    st.header(\"Step 3: Matching Factories\")\n    if matching_factories:\n        st.success(f\"We found {len(matching_factories)} matching factories!\")\n        for factory in matching_factories:\n            st.markdown(f\"\"\"\n            <div class=\"factory-card\">\n                <h3>{factory['name']}</h3>\n                <p><strong>Location:</strong> {factory['location']}</p>\n                <p><strong>Specialties:</strong> {', '.join(factory['specialties'])}</p>",
+        "detail": "pages.1_capability",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "pages.1_capability",
+        "description": "pages.1_capability",
+        "peekOfCode": "def main():\n    setup_ui()\n    product_types = get_product_types()\n    factories = get_factories()\n    product = product_selector(product_types)\n    st.markdown(f\"\"\"\n    <div class=\"product-card\">\n        <h2>{product}</h2>\n        <p>Please select the specific capabilities you need for your {product}.</p>\n    </div>",
+        "detail": "pages.1_capability",
+        "documentation": {}
+    },
+    {
         "label": "display_nested_dict_html",
         "kind": 2,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "def display_nested_dict_html(d, level=0, max_level=3):\n    html = \"\"\n    indent = '&nbsp;' * 4 * level\n    card_style = (\n        \"background-color: #ffffff; \"\n        \"border: 1px solid #dbdbdb; \"\n        \"border-radius: 8px; \"\n        \"margin: 8px 0; \"\n        \"padding: 12px; \"\n        \"box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); \"",
+        "peekOfCode": "def display_nested_dict_html(d, level=0, max_level=3):\n    html = \"\"\n    indent = '&nbsp;' * 4 * level\n    card_style = (\n        \"background-color: #ffffff; \"\n        \"border: 1px solid #e0e0e0; \"\n        \"border-radius: 12px; \"\n        \"margin: 4px 0 4px 20px; \"  # Adjusted margin-left for indentation\n        \"padding: 12px; \"\n        \"box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); \"",
         "detail": "app",
         "documentation": {}
     },
