@@ -18,6 +18,14 @@
         "documentation": {}
     },
     {
+        "label": "product_type",
+        "importPath": "data.product_type",
+        "description": "data.product_type",
+        "isExtraImport": true,
+        "detail": "data.product_type",
+        "documentation": {}
+    },
+    {
         "label": "json",
         "kind": 6,
         "isExtraImport": true,
@@ -27,11 +35,20 @@
         "documentation": {}
     },
     {
+        "label": "product_type",
+        "kind": 5,
+        "importPath": "data.product_type",
+        "description": "data.product_type",
+        "peekOfCode": "product_type = {\n    \"T-Shirt\": {\n        \"Fabric\": [\"Cotton\", \"Organic Cotton\", \"Polyester\", \"Cotton-Polyester Blend\", \"Modal\", \"Lyocell\"],\n        \"Printing\": [\"Screen Printing\", \"Digital Printing\", \"Heat Transfer\", \"Embroidery\"],\n        \"Cutting\": [\"Die Cutting\", \"Laser Cutting\", \"Automated Cutting\"],\n        \"Sewing\": [\"Overlock Stitching\", \"Flatlock Stitching\", \"Cover Stitching\"],\n        \"Finishing\": [\"Steam Pressing\", \"Folding and Packaging\", \"Labeling\", \"Hang Tag Attachment\"]\n    },\n    \"Jeans\": {\n        \"Fabric\": [\"Denim\", \"Stretch Denim\", \"Organic Denim\", \"Recycled Denim\"],",
+        "detail": "data.product_type",
+        "documentation": {}
+    },
+    {
         "label": "get_styles",
         "kind": 2,
         "importPath": "pages.1_capability",
         "description": "pages.1_capability",
-        "peekOfCode": "def get_styles():\n    return \"\"\"\n    <style>\n    body {\n        font-family: 'Arial', sans-serif;\n        color: #333;\n    }\n    .product-card {\n        background-color: #f9f9f9;\n        border-radius: 10px;",
+        "peekOfCode": "def get_styles():\n    return \"\"\"\n    <style>\n    body {\n        font-family: 'Arial', sans-serif;\n        color: #1D3557;\n    }\n    .product-card {\n        background-color: #F1FAEE;\n        border-radius: 10px;",
         "detail": "pages.1_capability",
         "documentation": {}
     },
@@ -40,7 +57,7 @@
         "kind": 2,
         "importPath": "pages.1_capability",
         "description": "pages.1_capability",
-        "peekOfCode": "def setup_ui():\n    st.set_page_config(page_title=\"H&M-Style Garment Manufacturing Matchmaker\", layout=\"wide\")\n    st.markdown(get_styles(), unsafe_allow_html=True)\n    st.title(\"H&M-Style Garment Manufacturing Matchmaker\")\n    st.write(\"\"\"\n    <div class=\"intro\">\n        Find the perfect factory for your H&M-style garment manufacturing needs. \n        Select your product type and specifications, and we'll match you with suitable factories.\n    </div>\n    \"\"\", unsafe_allow_html=True)",
+        "peekOfCode": "def setup_ui():\n    st.set_page_config(page_title=\"Garment Manufacturing Matchmaker\", layout=\"wide\")\n    st.markdown(get_styles(), unsafe_allow_html=True)\n    st.title(\"Garment Manufacturing Matchmaker\")\n    st.write(\"\"\"\n    <div class=\"intro\">\n        Find the perfect factory for your garment manufacturing needs. \n        Select your product type and specifications, and we'll match you with suitable factories.\n    </div>\n    \"\"\", unsafe_allow_html=True)",
         "detail": "pages.1_capability",
         "documentation": {}
     },
@@ -49,7 +66,7 @@
         "kind": 2,
         "importPath": "pages.1_capability",
         "description": "pages.1_capability",
-        "peekOfCode": "def get_product_types():\n    return {\n        \"T-Shirt\": {\n            \"Fabric\": [\"Cotton\", \"Organic Cotton\", \"Polyester\", \"Cotton-Polyester Blend\", \"Modal\", \"Lyocell\", \"Bamboo\", \"Hemp\"],\n            \"Printing\": [\"Screen Printing\", \"Digital Printing\", \"Heat Transfer\", \"Embroidery\", \"Sublimation Printing\", \"DTG Printing\"],\n            \"Cutting\": [\"Die Cutting\", \"Laser Cutting\", \"Automated Cutting\", \"Rotary Cutting\", \"Water Jet Cutting\"],\n            \"Sewing\": [\"Overlock Stitching\", \"Flatlock Stitching\", \"Cover Stitching\", \"Chain Stitching\", \"Blind Stitching\"],\n            \"Finishing\": [\"Steam Pressing\", \"Folding and Packaging\", \"Labeling\", \"Hang Tag Attachment\", \"Bio-Washing\", \"Softening\"]\n        },\n        \"Jeans\": {",
+        "peekOfCode": "def get_product_types():\n    return product_type\ndef get_factories():\n    return [\n        {\n            \"name\": \"EcoThreads Manufacturing\",\n            \"location\": \"Portland, Oregon\",\n            \"specialties\": [\"T-Shirts\", \"Sustainable Clothing\"],\n            \"min_order\": 500,\n            \"capabilities\": {",
         "detail": "pages.1_capability",
         "documentation": {}
     },
